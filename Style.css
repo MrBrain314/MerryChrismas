@@ -39,24 +39,6 @@ header {
     color: #e63946; /* Couleur au survol (rouge Noël) */
 }
 
-/* Style pour rendre l'en-tête réactif */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .navbar {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .logonoel {
-        margin-bottom: 0.5rem;
-    }
-}
-
 /*main*/
 
 
@@ -86,6 +68,7 @@ header {
     color: white; /* Rouge Noël */
     font-family: "Arial", sans-serif;
     position: relative;
+    text-shadow: 10px 6px 0px black;
 }
 
 /* Sous-titre */
@@ -94,6 +77,7 @@ header {
     color: white;
     position: relative;
     bottom: 2rem;
+    text-shadow: 5px 3px 0px black;
 }
 
 /* Bouton */
@@ -165,7 +149,6 @@ header {
 .wish-card p {
     font-size: 2rem;
     color: #555;
-    margin: 0;
 }
 
 
@@ -277,8 +260,10 @@ header {
 
 /* Section de la galerie */
 
+
+/* Section galerie */
 .gallery-section {
-    padding: 2rem 5%; /* Marges gauche et droite */
+    padding: 2rem 5%;
     text-align: center;
     background-color: #f9f9f9;
 }
@@ -289,69 +274,58 @@ header {
     color: #333;
 }
 
-/* Conteneur de la galerie */
+/* Conteneur principal */
 .gallery-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
+    display: grid; /* Utilisation de la grille */
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes de tailles égales */
+    grid-template-rows: auto; /* Laisse les lignes s'ajuster automatiquement */
     gap: 1rem; /* Espacement entre les images */
-    justify-content: center; /* Centrage horizontal */
-    flex-wrap: wrap;
-    
+    padding: 2rem;
+    justify-content: center; /* Centre le conteneur dans la page */
 }
 
 /* Style pour chaque image */
 .gallery-item {
     position: relative;
     overflow: hidden;
-    border: 2px solid #ddd; /* Bordure rectangulaire */
+    border: 2px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 .gallery-item img {
     width: 100%;
-    height: 100%; 
-    object-fit: cover; /* Coupe l'image pour s'adapter au conteneur */
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease;
+   
 }
 
-/* Effet de zoom sur l'image */
+/* Effet de zoom */
 .gallery-item:hover img {
     transform: scale(1.1);
 }
 
-/* Overlay pour afficher "Joyeux Noël" */
+/* Overlay */
 .gallery-item .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Couche semi-transparente */
+    background: rgba(0, 0, 0, 0.5);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     font-weight: bold;
-    opacity: 0; /* Caché par défaut */
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.gallery-item:hover .overlay {
-    opacity: 1; /* Visible au survol */
-}
-
-/* Les deux images du bas */
-.gallery-item:nth-child(5),
-.gallery-item:nth-child(6) {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); /* 4 colonnes */
-    gap: 1rem; /* Espacement entre les images */
-    justify-content: center; /* Centrage horizontal */
-    position: relative;
-    left: 26.90rem;
-    flex-wrap: wrap;
-
+.gallery-item:hover .overlay, .gallery-items:hover .overlay {
+    opacity: 1;
 }
 
 
@@ -448,36 +422,16 @@ header {
         margin-top: 50px;
         flex-wrap: wrap;
     }
-    
+    .nous-joindre{
+        text-align: center;
+    }
+
     .nous-joindre p{
-        text-align: center;
         font-weight: bolder;
-        position: relative;
-        right: 40px;
     
     }
     
-    .nous-joindre img{
-        position: relative;
-        left: 50px;
-        font-weight: bolder;
-    }
-    
-    .nous-joindres p{
-        position: relative;
-        right: 43px;
-        text-align: center;
-        font-weight: bolder;
-    }
-    
-    .nous-joindress p{
-        position: relative;
-        right: 8rem;
-        text-align: center;
-        font-weight: bolder;
-    }
-    
-    .nous-joindre:hover, .nous-joindres:hover, .nous-joindress:hover{
+    .nous-joindre:hover{
         color: red;
     }
     
@@ -508,20 +462,18 @@ header {
         margin: 0 15px;
         font-size: 18px;
     }
-    
-    .noel-footer{
-        position: relative;
-        left: 12rem;
-    }
 
+    .noel-footer {
+        display: flex; /* Utilise Flexbox pour l'alignement */
+        justify-content: center; /* Centre horizontalement */
+        align-items: center; /* Centre verticalement */
+    }
+    
     .noel-footer img{
+        justify-content: center;
         height: 40%;
         width: 40%;
         border-radius: 50%;
-    }
-    
-    .noel-footer:hover{
-        transform: scale(1.2);
     }
     
     .else{
@@ -640,62 +592,146 @@ header {
     /* Les portables */
 
     @media (max-width: 768px) {
-        header {
-            flex-direction: column; /* Empile les éléments de l'en-tête */
-            align-items: center;
-        }
+
+       /* Header */
+    header {
+        position: static; /* Supprime le sticky */
+        flex-direction: row; /* Les éléments s'empilent */
+        align-items: center; /* Centre les éléments horizontalement */
+        padding: 1rem 0; /* Réduit le padding */
+    }
+
+    .logonoel img,
+    .logonoel-1 img {
+        height: 25px; /* Réduit la taille des images */
+    }
+
+    .navbar {
+        display: flex;
+        flex-wrap: nowrap; /* Les liens restent sur une seule ligne */
+        white-space: nowrap; /* Évite le wrapping des liens */
+        gap: 0.5rem; /* Réduit l'espacement entre les liens */
+        padding: 0.5rem 0;
+    }
+
+    .navbar a {
+        font-size: 0.7rem; /* Réduit la taille des textes */
+    }
+
+    /* Main section */
+
+    .content{
+        position: relative;
+        bottom: 2rem;
+    }
+
+    .christmas-main .content h1{
+        font-size: 4rem;
+        text-shadow: 10px 6px 0px black;
+
+    }
     
-        .logonoel img, .logonoel-1 img {
-            height: 70px; /* Réduit la taille des logos */
-        }
+    .christmas-main .content .Discover2025{
+        position: relative;
+        bottom: 5px;
+    }
+    /* Voeux */
+
+    .wishes-grid {
+        grid-template-columns: repeat(1, 1fr); /* Une seule colonne */
+        gap: 1rem;
+    }
+
+    .gallery-container {
+        grid-template-columns: repeat(1, 1fr); /* Une seule colonne */
+        gap: 1rem;
+    }
+
+    /* About */
+
+    .about-section {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .about-image {
+        display: flex; /* Utilisation de Flexbox pour centrer */
+        justify-content: center; /* Centre horizontalement */
+        align-items: center; /* Centre verticalement */
+        width: 90%; /* Assure que le conteneur occupe toute la largeur */
+        text-align: center; /* Utile pour centrer les enfants non-Flexbox */
+        position: relative;
+        right: 10px;
+    }
     
-        .navbar {
-            flex-direction: column; /* Les liens s'empilent */
-            gap: 0.5rem; /* Réduit l'espacement entre les liens */
-        }
-    
-        .wishes-grid {
-            grid-template-columns: repeat(1, 1fr); /* Une seule colonne */
-            gap: 1rem;
-        }
-    
-        .gallery-container {
-            grid-template-columns: repeat(1, 1fr); /* Une seule colonne */
-            gap: 1rem;
-        }
-    
-        .about-section {
-            flex-direction: column;
-            margin: 1rem;
-        }
-    
-        .about-image img {
-            width: 100%; /* L'image occupe toute la largeur */
-        }
-    
-        .about-right {
-            align-items: center;
-        }
-    
-        .footer-container {
-            flex-direction: column;
-            gap: 1rem;
-        }
-    
-        .nosreseau img {
-            width: 50px;
-            height: 50px; /* Réduit la taille des icônes des réseaux sociaux */
-        }
-    
-        .contact-form {
-            width: 90%;
-            padding: 1rem;
-        }
-    
-        .parent-container {
-            width: 100%; /* Prend toute la largeur disponible */
-            left: 0;
-            height: auto; /* Ajuste la hauteur automatiquement */
-        }
+    .about-image img {
+        width: auto; /* Maintient les proportions originales */
+        max-width: 90%; /* Empêche l'image de dépasser le conteneur */
+        height: auto; /* Assure une échelle proportionnelle */
+    }
+
+    .about-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+
+    .about-content {
+        width: 70%;
+    }
+
+    .about-content h2{
+        font-size: 1.75rem;
+    }
+
+    .about-content p{
+        font-size: 1rem;
+    }
+
+    /* Footer */
+
+    .footer-container {
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .logo-final{
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+    }
+
+    .other{
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center
+    }
+
+    .contacts-us{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .nosreseau img {
+        width: 50px;
+        height: 50px; /* Réduit la taille des icônes des réseaux sociaux */
+    }
+
+    .contact-form {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .parent-container {
+        width: 100%; /* Prend toute la largeur disponible */
+        left: 0;
+        height: auto; /* Ajuste la hauteur automatiquement */
+    }
     }
     
